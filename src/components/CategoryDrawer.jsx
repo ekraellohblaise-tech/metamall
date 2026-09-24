@@ -4,7 +4,7 @@ import {
   X, ChevronDown, ChevronRight, Search, 
   Coffee, Laptop, Smartphone, Shirt, Footprints, 
   Sparkles, Cpu, Home, Trophy, Watch, Grid, 
-  Zap, ShieldCheck, Headphones, ArrowRight
+  ShieldCheck, Headphones, ArrowRight
 } from 'lucide-react';
 
 export const CategoryDrawer = () => {
@@ -14,9 +14,7 @@ export const CategoryDrawer = () => {
     setCategoryDrawerOpen, 
     selectedCategory, 
     selectCategoryFromDrawer,
-    openInfoModal,
-    openProductDetail,
-    products
+    openInfoModal
   } = useShop();
 
   const [expandedCatIds, setExpandedCatIds] = useState(['cat-chaussures']); // default expand Chaussures
@@ -81,8 +79,6 @@ export const CategoryDrawer = () => {
     return matchCat || matchSub;
   });
 
-  const starProduct = products.find(p => p.id === 'p-boots');
-
   return (
     <div 
       className="category-drawer-overlay" 
@@ -134,29 +130,6 @@ export const CategoryDrawer = () => {
             )}
           </div>
         </div>
-
-        {/* Special Promo Highlight Card */}
-        {starProduct && !drawerSearch && (
-          <div 
-            className="drawer-promo-card"
-            onClick={() => {
-              setCategoryDrawerOpen(false);
-              openProductDetail(starProduct);
-            }}
-          >
-            <div className="d-promo-badge">
-              <Zap size={13} /> VENTE FLASH -20%
-            </div>
-            <div className="d-promo-body">
-              <img src="/images/boots-1.jpg" alt="Bottes de sécurité" />
-              <div>
-                <strong>Bottes de Sécurité Acier</strong>
-                <p>Spécial Chantiers BTP & Étanche</p>
-                <span className="d-promo-price">57 600 FCFA <del>72 000 FCFA</del></span>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* "Tous les articles" quick link */}
         <div className="drawer-all-link-wrapper">

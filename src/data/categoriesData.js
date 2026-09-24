@@ -66,8 +66,7 @@ export const initialCategories = [
     name: "Chaussures",
     slug: "chaussures",
     iconName: "Footprints",
-    badge: "Vente Flash -20%",
-    badgeColor: "red",
+    badge: null,
     description: "Bottes de sécurité acier, baskets et chaussures pro",
     subcategories: [
       { id: "sub-bottes-securite", name: "Bottes de sécurité acier (Chantier Pro)", count: 24, hot: true },

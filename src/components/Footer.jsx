@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useShop } from '../context/ShopContext';
-import { ShieldCheck, Truck, Headphones, RefreshCw, Send, Store, ArrowRight, Sparkles } from 'lucide-react';
+import { ShieldCheck, Truck, Headphones, RefreshCw, Send } from 'lucide-react';
 import { productCategories } from '../data/products';
 
 export const Footer = () => {
@@ -47,32 +47,6 @@ export const Footer = () => {
               <strong>Service Client Réactif 7j/7</strong>
               <p>Support WhatsApp & appel direct</p>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Vendor Callout Banner: "Devenir Vendeur sur MetaMall" */}
-      <div className="footer-vendor-banner">
-        <div className="footer-container vendor-banner-inner">
-          <div className="v-banner-left">
-            <div className="v-banner-icon-circle">
-              <Store size={26} />
-            </div>
-            <div className="v-banner-text">
-              <h3>Vous êtes commerçant, artisan ou distributeur ?</h3>
-              <p>Ouvrez votre boutique sur MetaMall, touchez des milliers d'acheteurs et gérez vos ventes en toute simplicité.</p>
-            </div>
-          </div>
-          <div className="v-banner-right">
-            <button 
-              type="button" 
-              className="btn-footer-vendor"
-              onClick={() => setActiveModal('vendorPortal')}
-            >
-              <Sparkles size={16} />
-              <span>{vendorUser ? "Mon Espace Vendeur" : "Devenir Vendeur sur MetaMall"}</span>
-              <ArrowRight size={16} />
-            </button>
           </div>
         </div>
       </div>

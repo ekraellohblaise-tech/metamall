@@ -16,6 +16,7 @@ import { ShopReviewsSection } from './components/ShopReviewsSection';
 import { InfoModals } from './components/InfoModals';
 import { Footer } from './components/Footer';
 import { CategoryDrawer } from './components/CategoryDrawer';
+import { VendorPortal } from './components/VendorPortal';
 import { 
   ArrowUpDown, PlusCircle, CheckCircle2, 
   Info, AlertTriangle, Footprints, Coffee, Laptop, Sprout, Watch
@@ -152,10 +153,10 @@ const MainContent = () => {
               <button 
                 type="button" 
                 className="btn-toolbar-manage"
-                onClick={() => setActiveModal('addEditProduct')}
+                onClick={() => setActiveModal('vendorPortal')}
               >
                 <PlusCircle size={15} />
-                <span>Gérer les Prix / Articles</span>
+                <span>Espace Vendeur & Produits</span>
               </button>
 
               {/* Sort By Dropdown */}
@@ -239,6 +240,7 @@ const MainContent = () => {
       {activeModal === 'auth' && <AuthModal />}
       {activeModal === 'profile' && <ProfileModal />}
       {activeModal === 'addEditProduct' && <AddEditProductModal />}
+      {activeModal === 'vendorPortal' && <VendorPortal />}
       {activeModal === 'info' && <InfoModals />}
     </div>
   );

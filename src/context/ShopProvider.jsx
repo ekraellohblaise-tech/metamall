@@ -63,6 +63,17 @@ export const ShopProvider = ({ children }) => {
     return null; // not logged in initially
   });
 
+  // Vendor User
+  const [vendorUser, setVendorUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('metamall_vendor');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return null; // not logged in as vendor initially
+  });
+
   // Navigation & Filtering
   const [selectedCategory, setSelectedCategory] = useState("Tous les articles");
   const [searchQuery, setSearchQuery] = useState("");
@@ -119,6 +130,16 @@ export const ShopProvider = ({ children }) => {
       localStorage.setItem('metamall_user', JSON.stringify(user));
     } catch (e) { console.error(e); }
   }, [user]);
+
+  useEffect(() => {
+    try {
+      if (vendorUser) {
+        localStorage.setItem('metamall_vendor', JSON.stringify(vendorUser));
+      } else {
+        localStorage.removeItem('metamall_vendor');
+      }
+    } catch (e) { console.error(e); }
+  }, [vendorUser]);
 
   useEffect(() => {
     try {
@@ -209,6 +230,12 @@ export const ShopProvider = ({ children }) => {
       }
     });
     showToast(newOrUpdatedProduct.id ? "Article mis à jour avec succès !" : "Nouvel article ajouté au catalogue !", "success");
+  };
+
+  // Delete Product
+  const deleteProduct = (productId) => {
+    setProducts(prev => prev.filter(p => p.id !== productId));
+    showToast("Article retiré du catalogue avec succès.", "info");
   };
 
   // Update specific product price and discount
@@ -378,6 +405,58 @@ export const ShopProvider = ({ children }) => {
     showToast("Vous avez été déconnecté.", "info");
   };
 
+  // Vendor Auth
+  const vendorLogin = (email, _password) => {
+    const mockVendor = {
+      id: 'ven-traore-01',
+      storeName: "Maison Ivoire Confort & Pro",
+      ownerName: "Amadou Traoré",
+      email: email || "amadou.traore@maisonivoire.ci",
+      phone: "+225 07 45 89 12 34",
+      city: "Abidjan (Marcory Zone 4)",
+      category: "Vêtements & Chaussures",
+      description: "Boutique certifiée spécialisée dans l'équipement de sécurité et vêtements professionnels.",
+      verified: true,
+      rating: 4.9,
+      reviewCount: 38,
+      totalSales: 48,
+      totalRevenue: 2764800,
+      joinedDate: "Janvier 2026",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80"
+    };
+    setVendorUser(mockVendor);
+    showToast(`Bienvenue dans votre Espace Vendeur, ${mockVendor.storeName} !`, "success");
+    return mockVendor;
+  };
+
+  const vendorRegister = (vendorData) => {
+    const newVendor = {
+      id: 'ven-' + Date.now(),
+      storeName: vendorData.storeName || "Ma Boutique MetaMall",
+      ownerName: vendorData.ownerName || "Vendeur Partenaire",
+      email: vendorData.email,
+      phone: vendorData.phone || "+225 07 00 00 00 00",
+      city: vendorData.city || "Abidjan",
+      category: vendorData.category || "Mode & Vêtements",
+      description: vendorData.description || "Boutique certifiée sur la place de marché MetaMall.",
+      verified: true,
+      rating: 5.0,
+      reviewCount: 0,
+      totalSales: 0,
+      totalRevenue: 0,
+      joinedDate: "Septembre 2026",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80"
+    };
+    setVendorUser(newVendor);
+    showToast(`Félicitations ! Votre boutique "${newVendor.storeName}" est maintenant active sur MetaMall !`, "success");
+    return newVendor;
+  };
+
+  const vendorLogout = () => {
+    setVendorUser(null);
+    showToast("Déconnexion de l'espace vendeur effectuée.", "info");
+  };
+
   // Open product detail
   const openProductDetail = (product) => {
     setSelectedProduct(product);
@@ -461,6 +540,11 @@ export const ShopProvider = ({ children }) => {
         openInfoModal,
         orders,
         createOrder,
+        vendorUser,
+        vendorLogin,
+        vendorRegister,
+        vendorLogout,
+        deleteProduct,
         toast,
         showToast
       }}

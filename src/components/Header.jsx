@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useShop } from '../context/ShopContext';
 import { 
-  Search, ShoppingCart, Heart, User, PlusCircle, X, Globe, 
+  Search, ShoppingCart, Heart, User, X, Globe, 
   Menu, ShieldCheck, Headphones, ChevronDown
 } from 'lucide-react';
 import { productCategories } from '../data/products';
@@ -117,7 +117,6 @@ export const Header = () => {
             <a href="#" className="brand-logo" onClick={(e) => { e.preventDefault(); setSelectedCategory("Tous les articles"); setSearchQuery(""); }}>
               <span className="logo-meta">Meta</span>
               <span className="logo-mall">Mall</span>
-              <span className="logo-badge">PRO</span>
             </a>
           </div>
 
@@ -159,17 +158,6 @@ export const Header = () => {
 
           {/* Action Buttons */}
           <div className="header-actions">
-            {/* Quick Add / Manage Product Button */}
-            <button 
-              type="button" 
-              className="action-btn seller-action-btn"
-              onClick={() => setActiveModal('addEditProduct')}
-              title="Ajouter ou modifier un article / prix"
-            >
-              <PlusCircle size={18} />
-              <span className="btn-label hide-mobile">Gérer Produits</span>
-            </button>
-
             {/* User Profile / Auth */}
             <button 
               type="button" 
@@ -222,28 +210,6 @@ export const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Search Row (visible on small screens) */}
-        <div className="mobile-search-row">
-          <form className="mobile-search-form" onSubmit={handleSearchSubmit}>
-            <Search size={16} className="m-search-ico" />
-            <input 
-              type="text" 
-              placeholder="Rechercher bottes, ordinateurs, électroménager..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            {searchQuery && (
-              <button 
-                type="button" 
-                className="m-clear-btn"
-                onClick={() => setSearchQuery("")}
-                aria-label="Effacer"
-              >
-                <X size={15} />
-              </button>
-            )}
-          </form>
-        </div>
       </div>
     </header>
   );

@@ -85,7 +85,6 @@ export const Footer = () => {
             <div className="brand-logo footer-logo">
               <span className="logo-meta">Meta</span>
               <span className="logo-mall">Mall</span>
-              <span className="logo-badge">PRO</span>
             </div>
             <p className="brand-desc">
               Votre place de marché moderne pour les équipements professionnels, vêtements de travail, informatique, électroménager et jardinage. Des articles authentiques aux meilleurs tarifs avec réductions garanties.
